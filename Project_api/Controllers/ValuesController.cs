@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_api.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -22,9 +23,37 @@ namespace Project_api.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody] string value)
+        public UserCreateReturn Post([FromBody] UserCreate newUser)
         {
+            User user = new User() { userId = Guid.NewGuid(), userName = newUser.email, userEmail = newUser.email };
+
+            using (var db = new DBLinqToSqlDataContext())
+            {
+                if (db.Users.Any(u => u.userEmail == user.userEmail))
+                {
+                    return new UserCreateReturn { state = false, playerId = db.Users.Single(u=>u.userEmail==user.userEmail).userId, message = "This email address is already being used" };
+                }
+                else
+                {
+                    db.Users.InsertOnSubmit(user);
+                    db.SubmitChanges();
+                    return new UserCreateReturn { state = true, playerId = user.userId, message = "User successfully created" };
+                }
+            }
         }
+
+        //public string Post([FromBody] GameCreate newGame)
+        //{
+        //    Game game = new Game() { gameId = Guid.NewGuid(), gameName = newGame.gameName, player1Id = newGame.player1Id, matchStartCount = newGame.matchStartCount, matchRoundCount = newGame.matchRoundCount };
+
+        //    using (var db = new DBLinqToSqlDataContext())
+        //    {
+        //        db.Games.InsertOnSubmit(game);
+        //        db.SubmitChanges();
+        //        return "Success";
+        //    }
+        //}
+
 
         // PUT api/values/5
         public void Put(int id, [FromBody] string value)

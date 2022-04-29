@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Project_api.Models
 {
@@ -10,5 +12,6 @@ namespace Project_api.Models
         string gameId { get; set; }
         string playerId { get; set; }
         int matchRoundCount { get; set; }
+        
     }
 }

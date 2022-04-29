@@ -1,0 +1,19 @@
+User
+	userid
+	email
+	name
+
+Games
+	gameid
+	name
+	player1id
+	player2id
+	matchStartCount
+	matchRoundCount
+	lastMoveNumber
+	
+Moves
+	gameid
+	moveNumber
+	movePlayer
+	moveMatchCount

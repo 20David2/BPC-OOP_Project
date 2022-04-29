@@ -7,5 +7,7 @@ namespace Project_api.Models
 {
     public class TestClass1
     {
+        
+        //Ahoj
     }
 }

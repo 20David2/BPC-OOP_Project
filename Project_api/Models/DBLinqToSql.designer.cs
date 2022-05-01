@@ -33,12 +33,12 @@ namespace Project_api.Models
     partial void InsertGame(Game instance);
     partial void UpdateGame(Game instance);
     partial void DeleteGame(Game instance);
-    partial void InsertMove(Move instance);
-    partial void UpdateMove(Move instance);
-    partial void DeleteMove(Move instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertMove(Move instance);
+    partial void UpdateMove(Move instance);
+    partial void DeleteMove(Move instance);
     #endregion
 		
 		public DBLinqToSqlDataContext() : 
@@ -79,19 +79,19 @@ namespace Project_api.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Move> Moves
-		{
-			get
-			{
-				return this.GetTable<Move>();
-			}
-		}
-		
 		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Move> Moves
+		{
+			get
+			{
+				return this.GetTable<Move>();
 			}
 		}
 	}
@@ -114,8 +114,6 @@ namespace Project_api.Models
 		
 		private System.Nullable<int> _matchRoundCount;
 		
-		private System.Nullable<int> _lastMoveCount;
-		
 		private EntitySet<Move> _Moves;
 		
     #region Extensibility Method Definitions
@@ -134,8 +132,6 @@ namespace Project_api.Models
     partial void OnmatchStartCountChanged();
     partial void OnmatchRoundCountChanging(System.Nullable<int> value);
     partial void OnmatchRoundCountChanged();
-    partial void OnlastMoveCountChanging(System.Nullable<int> value);
-    partial void OnlastMoveCountChanged();
     #endregion
 		
 		public Game()
@@ -264,26 +260,6 @@ namespace Project_api.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastMoveCount", DbType="Int")]
-		public System.Nullable<int> lastMoveCount
-		{
-			get
-			{
-				return this._lastMoveCount;
-			}
-			set
-			{
-				if ((this._lastMoveCount != value))
-				{
-					this.OnlastMoveCountChanging(value);
-					this.SendPropertyChanging();
-					this._lastMoveCount = value;
-					this.SendPropertyChanged("lastMoveCount");
-					this.OnlastMoveCountChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Move", Storage="_Moves", ThisKey="gameId", OtherKey="movesGameId")]
 		public EntitySet<Move> Moves
 		{
@@ -330,6 +306,116 @@ namespace Project_api.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _userId;
+		
+		private string _userEmail;
+		
+		private string _userName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnuserIdChanging(System.Guid value);
+    partial void OnuserIdChanged();
+    partial void OnuserEmailChanging(string value);
+    partial void OnuserEmailChanged();
+    partial void OnuserNameChanging(string value);
+    partial void OnuserNameChanged();
+    #endregion
+		
+		public User()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid userId
+		{
+			get
+			{
+				return this._userId;
+			}
+			set
+			{
+				if ((this._userId != value))
+				{
+					this.OnuserIdChanging(value);
+					this.SendPropertyChanging();
+					this._userId = value;
+					this.SendPropertyChanged("userId");
+					this.OnuserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userEmail", DbType="NVarChar(400) NOT NULL", CanBeNull=false)]
+		public string userEmail
+		{
+			get
+			{
+				return this._userEmail;
+			}
+			set
+			{
+				if ((this._userEmail != value))
+				{
+					this.OnuserEmailChanging(value);
+					this.SendPropertyChanging();
+					this._userEmail = value;
+					this.SendPropertyChanged("userEmail");
+					this.OnuserEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NVarChar(50)")]
+		public string userName
+		{
+			get
+			{
+				return this._userName;
+			}
+			set
+			{
+				if ((this._userName != value))
+				{
+					this.OnuserNameChanging(value);
+					this.SendPropertyChanging();
+					this._userName = value;
+					this.SendPropertyChanged("userName");
+					this.OnuserNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Moves")]
 	public partial class Move : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -343,6 +429,8 @@ namespace Project_api.Models
 		private System.Nullable<System.Guid> _movePlayer;
 		
 		private System.Nullable<int> _moveMatchCount;
+		
+		private int _actualMatchCount;
 		
 		private EntityRef<Game> _Game;
 		
@@ -358,6 +446,8 @@ namespace Project_api.Models
     partial void OnmovePlayerChanged();
     partial void OnmoveMatchCountChanging(System.Nullable<int> value);
     partial void OnmoveMatchCountChanged();
+    partial void OnactualMatchCountChanging(int value);
+    partial void OnactualMatchCountChanged();
     #endregion
 		
 		public Move()
@@ -450,6 +540,26 @@ namespace Project_api.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_actualMatchCount", DbType="Int NOT NULL")]
+		public int actualMatchCount
+		{
+			get
+			{
+				return this._actualMatchCount;
+			}
+			set
+			{
+				if ((this._actualMatchCount != value))
+				{
+					this.OnactualMatchCountChanging(value);
+					this.SendPropertyChanging();
+					this._actualMatchCount = value;
+					this.SendPropertyChanged("actualMatchCount");
+					this.OnactualMatchCountChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Game_Move", Storage="_Game", ThisKey="movesGameId", OtherKey="gameId", IsForeignKey=true)]
 		public Game Game
 		{
@@ -480,116 +590,6 @@ namespace Project_api.Models
 						this._movesGameId = default(System.Guid);
 					}
 					this.SendPropertyChanged("Game");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _userId;
-		
-		private string _userEmail;
-		
-		private string _userName;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnuserIdChanging(System.Guid value);
-    partial void OnuserIdChanged();
-    partial void OnuserEmailChanging(string value);
-    partial void OnuserEmailChanged();
-    partial void OnuserNameChanging(string value);
-    partial void OnuserNameChanged();
-    #endregion
-		
-		public User()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid userId
-		{
-			get
-			{
-				return this._userId;
-			}
-			set
-			{
-				if ((this._userId != value))
-				{
-					this.OnuserIdChanging(value);
-					this.SendPropertyChanging();
-					this._userId = value;
-					this.SendPropertyChanged("userId");
-					this.OnuserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userEmail", DbType="NVarChar(400) NOT NULL", CanBeNull=false)]
-		public string userEmail
-		{
-			get
-			{
-				return this._userEmail;
-			}
-			set
-			{
-				if ((this._userEmail != value))
-				{
-					this.OnuserEmailChanging(value);
-					this.SendPropertyChanging();
-					this._userEmail = value;
-					this.SendPropertyChanged("userEmail");
-					this.OnuserEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userName", DbType="NVarChar(50)")]
-		public string userName
-		{
-			get
-			{
-				return this._userName;
-			}
-			set
-			{
-				if ((this._userName != value))
-				{
-					this.OnuserNameChanging(value);
-					this.SendPropertyChanging();
-					this._userName = value;
-					this.SendPropertyChanged("userName");
-					this.OnuserNameChanged();
 				}
 			}
 		}

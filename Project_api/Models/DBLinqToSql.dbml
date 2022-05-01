@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="projectDB" Class="DBLinqToSqlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\david\source\repos\BPC-OOP_Project\projectDB.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="projectDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\david\OneDrive\Dokumenty\GitHub\BPC-OOP_Project\projectDB.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="projectDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Games" Member="Games">
     <Type Name="Game">
       <Column Name="gameId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -8,8 +8,14 @@
       <Column Name="Player2Id" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="matchStartCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="matchRoundCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="lastMoveCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Game_Move" Member="Moves" ThisKey="gameId" OtherKey="movesGameId" Type="Move" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="userId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="userEmail" Type="System.String" DbType="NVarChar(400) NOT NULL" CanBeNull="false" />
+      <Column Name="userName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Moves" Member="Moves">
@@ -18,14 +24,8 @@
       <Column Name="moveNumber" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="movePlayer" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="moveMatchCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="actualMatchCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Game_Move" Member="Game" ThisKey="movesGameId" OtherKey="gameId" Type="Game" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="userId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="userEmail" Type="System.String" DbType="NVarChar(400) NOT NULL" CanBeNull="false" />
-      <Column Name="userName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

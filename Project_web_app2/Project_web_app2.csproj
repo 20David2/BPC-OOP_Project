@@ -93,6 +93,8 @@
     <Compile Include="App.Models\GameCreateReturn.cs" />
     <Compile Include="App.Models\GameList.cs" />
     <Compile Include="App.Models\GameMove.cs" />
+    <Compile Include="App.Models\GameMoveReturn.cs" />
+    <Compile Include="App.Models\GameConst.cs" />
     <Compile Include="App.Models\JoinGame.cs" />
     <Compile Include="App.Models\UserCreate.cs" />
     <Compile Include="App.Models\UserCreateReturn.cs" />

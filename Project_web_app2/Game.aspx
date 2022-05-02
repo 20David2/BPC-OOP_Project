@@ -9,16 +9,35 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="lblCount" runat="server" Text="Počet zápalek: "></asp:Label>
+            <asp:Label ID="lblRemainingText" runat="server" Text="Total number of matches:"></asp:Label>
+            <asp:Label ID="lblRemainingInfo" runat="server" Text=""></asp:Label>
+            <br />
+        <asp:Label ID="lblMaxPerRound" runat="server" Text="" Visible ="false"></asp:Label>
+
+            <br />
+                    <asp:Label ID="Label3" runat="server" Text="Na tahu je hrac: "></asp:Label>
+        <asp:Label ID="lblWhoTurn" runat="server" Text=""></asp:Label>
+
+
+            <br />
+            <br />
         </div>
-        <asp:Label ID="Label1" runat="server" Text="Tah: "></asp:Label>
-        <asp:TextBox ID="tbMove" runat="server"></asp:TextBox>
+        <asp:Label ID="Label1" runat="server" Text="I take "></asp:Label>
+
+        <asp:TextBox ID="tbMove" runat="server" Width="30px"></asp:TextBox>
+        <asp:Label ID="Label2" runat="server" Text=" matches"></asp:Label>
+
         <br />
-        <asp:Button ID="btnPlay" runat="server" OnClick="btnPlay_Click" Text="Button" />
+
+        <br />
+        <asp:Button ID="btnPlay" runat="server" OnClick="btnPlay_Click" Text="Play" Width="70px" />
         <p>
-            <asp:Button ID="btnReload" runat="server" Text="Reload" />
-        </p>
+            &nbsp;</p>
         <asp:Label ID="lblState" runat="server" Text=""></asp:Label>
+        <br />
+        <asp:Label ID="lblError" runat="server" Text="" Visible ="false"></asp:Label>
+
+
     </form>
 </body>
 </html>

@@ -29,7 +29,8 @@ namespace Project_web_app2
                 email = TextBox1.Text,
             };
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44381/");
+            //client.BaseAddress = new Uri("https://localhost:44381/");
+            client.BaseAddress = new Uri("https://oopzapalky.trialhosting.cz/matchapi/");
             HttpResponseMessage response = client.PostAsJsonAsync("api/values", user).Result;
             if (response.IsSuccessStatusCode)
             {

@@ -38,7 +38,7 @@ namespace Project_api.Controllers
                 db.SubmitChanges();
                 return new GameCreateReturn { state = true, gameId = game.gameId, message = "Game successfully created" };
             }
-        }
+        }   
 
 
         ////PUT api/values

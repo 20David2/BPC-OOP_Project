@@ -215,10 +215,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBLinqToSql.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\GameConst.cs" />
     <Compile Include="Models\GameCreate.cs" />
     <Compile Include="Models\GameCreateReturn.cs" />
     <Compile Include="Models\GameList.cs" />
     <Compile Include="Models\GameMove.cs" />
+    <Compile Include="Models\GameMoveReturn.cs" />
     <Compile Include="Models\JoinGame.cs" />
     <Compile Include="Models\MatchData.cs" />
     <Compile Include="Models\UserCreate.cs" />

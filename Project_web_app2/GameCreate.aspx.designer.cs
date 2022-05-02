@@ -24,13 +24,13 @@ namespace Project_web_app2
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// tbGameName control.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbGameName;
+        protected global::System.Web.UI.WebControls.Label Label4;
 
         /// <summary>
         /// Label1 control.
@@ -42,13 +42,13 @@ namespace Project_web_app2
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// tbMatchStart control.
+        /// tbGameName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbMatchStart;
+        protected global::System.Web.UI.WebControls.TextBox tbGameName;
 
         /// <summary>
         /// Label2 control.
@@ -60,13 +60,13 @@ namespace Project_web_app2
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// tbMatchRound control.
+        /// DDNumMatches control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbMatchRound;
+        protected global::System.Web.UI.WebControls.DropDownList DDNumMatches;
 
         /// <summary>
         /// Label3 control.
@@ -76,6 +76,15 @@ namespace Project_web_app2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
+
+        /// <summary>
+        /// DDMatchRound control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDMatchRound;
 
         /// <summary>
         /// btSubmit control.
@@ -112,6 +121,15 @@ namespace Project_web_app2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblGameid;
+
+        /// <summary>
+        /// lblInfoError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInfoError;
 
         /// <summary>
         /// lbGames control.

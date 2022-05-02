@@ -15,6 +15,7 @@ namespace Project_web_app2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            btContinue.Visible = false;
             if (IsPostBack)
                 return;
             else
@@ -74,9 +75,9 @@ namespace Project_web_app2
                 List<GameList> back = Newtonsoft.Json.JsonConvert.DeserializeObject<List<GameList>>(result);
 
                 List<string> values = new List<string>();
-                for(int i = 1; i <= back.Count; i++)
+                for (int i = 1; i <= back.Count; i++)
                 {
-                    values.Add(i.ToString() + ". " + back[i-1]);
+                    values.Add(i.ToString() + ". " + back[i - 1]);
                 }
 
                 lbGames.DataSource = values;
@@ -127,29 +128,57 @@ namespace Project_web_app2
         }
         protected async void btSubmit_Click(object sender, EventArgs e)
         {
-            GameCreated game = new GameCreated
+            
+            if (DDMatchRound.Text != "" && DDNumMatches.Text != "" && tbGameName.Text != "")
             {
-                gameName = tbGameName.Text,
-                player1Id = new Guid ( Request["id"] ),
-                matchStartCount = int.Parse(tbMatchStart.Text),
-                matchRoundCount = int.Parse(tbMatchRound.Text),
+                int matches = int.Parse(DDNumMatches.Text);
+                int rounds = int.Parse(DDMatchRound.Text);
+                string name = tbGameName.Text;
+                if (new Guid(Request["id"]) == null)
+                {
+                    Response.Redirect("Defaul.aspx");
+                }
+                else
+                {
+                    GameCreated game = new GameCreated
+                    {
+                        gameName = name,
+                        player1Id = new Guid(Request["id"]), //vypis ze spatne prihlasen, zpet na default
+                        matchStartCount = matches,
+                        matchRoundCount = rounds
 
-            };
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44381/");
-            HttpResponseMessage response = client.PostAsJsonAsync("api/gameCreate", game).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-                GameCreateReturn back = Newtonsoft.Json.JsonConvert.DeserializeObject<GameCreateReturn>(result);
-                lblState.Text = back.message;
-                lblGameid.Text = back.gameId.ToString();
+                    };
+                
+                    
+
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri("https://localhost:44381/");
+                    HttpResponseMessage response = client.PostAsJsonAsync("api/gameCreate", game).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        GameCreateReturn back = Newtonsoft.Json.JsonConvert.DeserializeObject<GameCreateReturn>(result);
+                        lblState.Text = back.message;
+                        lblGameid.Text = back.gameId.ToString();
+                        lbGames.Visible = false;
+                        btnredirect.Visible = false;
+                        btContinue.Visible = true;
+                    }
+                    else
+                    {
+                        lblState.Text = "Error";
+                    }
+                    }
             }
             else
             {
-                lblState.Text = "Error";
+                lblInfoError.Text = "You have to choose something";
             }
+
+            
         }
+
+        
 
         protected void btContinue_Click(object sender, EventArgs e)
         {

@@ -18,7 +18,7 @@
         <p>
             <asp:Button ID="btnReload" runat="server" Text="Reload" />
         </p>
-        <asp:Label ID="lblState" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="lblState" runat="server" Text=""></asp:Label>
     </form>
 </body>
 </html>

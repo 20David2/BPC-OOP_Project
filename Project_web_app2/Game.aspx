@@ -9,13 +9,22 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="lblRemainingText" runat="server" Text="Total number of matches:"></asp:Label>
-            <asp:Label ID="lblRemainingInfo" runat="server" Text=""></asp:Label>
+            <asp:Label ID="lblGameNameText" runat="server" Text="Game name: "></asp:Label>
+            <asp:Label ID="lblGameName" runat="server" Text="Label"></asp:Label>
             <br />
-        <asp:Label ID="lblMaxPerRound" runat="server" Text="" Visible ="false"></asp:Label>
+            <br />
+            <br />
+            <asp:Label ID="lblRemainingText" runat="server" Text="Remaining matches:"></asp:Label>
+            <asp:Label ID="lblRemainingInfo" runat="server" Text=""></asp:Label>
+            <asp:Label ID="lblLastCount" runat="server" Visible="False"></asp:Label>
+            <br />
+            <asp:Label ID="lblMaxText" runat="server" Text="Max in one round:"></asp:Label>
+&nbsp;
+        <asp:Label ID="lblMaxPerRound" runat="server"></asp:Label>
 
             <br />
-                    <asp:Label ID="Label3" runat="server" Text="Na tahu je hrac: "></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="Next move: "></asp:Label>
+        &nbsp;&nbsp;&nbsp;
         <asp:Label ID="lblWhoTurn" runat="server" Text=""></asp:Label>
 
 
@@ -30,7 +39,8 @@
         <br />
 
         <br />
-        <asp:Button ID="btnPlay" runat="server" OnClick="btnPlay_Click" Text="Play" Width="70px" />
+        <asp:Button ID="btnPlay" runat="server" OnClick="btnPlay_Click" Text="Play" Width="60px" />
+        <asp:Button ID="btnReload" runat="server" OnClick="btnReload_Click" Text="Reload" Visible="False" />
         <p>
             &nbsp;</p>
         <asp:Label ID="lblState" runat="server" Text=""></asp:Label>

@@ -25,7 +25,7 @@ namespace Project_api.Controllers
         // POST api/values
         public UserCreateReturn Post([FromBody] UserCreate newUser)
         {
-            User user = new User() { userId = Guid.NewGuid(), userName = newUser.email, userEmail = newUser.email };
+            User user = new User() { userId = Guid.NewGuid(), userName = newUser.name, userEmail = newUser.email };
 
             using (var db = new DBLinqToSqlDataContext())
             {

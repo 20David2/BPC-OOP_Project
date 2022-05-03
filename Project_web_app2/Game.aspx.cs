@@ -14,15 +14,22 @@ namespace Project_web_app2
     public partial class Game : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-            int nummatches = 20;
-            
+        {            
             if (IsPostBack) {
                 return;
             }
             else
             {
-                lblRemainingInfo.Text = nummatches.ToString();
+                try
+                {
+                    Guid guid1 = new Guid(Request["gameid"]);
+                    Guid guid2 = new Guid(Request["playerid"]);
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("Default.aspx");
+                }
+                GetConst();
             }
         }
 
@@ -47,11 +54,23 @@ namespace Project_web_app2
                     var result = await response.Content.ReadAsStringAsync();
                     GameMoveReturn back = Newtonsoft.Json.JsonConvert.DeserializeObject<GameMoveReturn>(result);
                     
-
-
                     if (back.state)
                     {
-                        lblState.Text = "Your move!";
+                        lblLastCount.Text = back.NumOfMatchesRemaining.ToString();
+                        lblRemainingInfo.Text = back.NumOfMatchesRemaining.ToString();
+                        lblWhoTurn.Text = back.NamePlayerTurn;
+                        lblError.Text = "";
+                        lblState.Text = "";
+
+                        btnPlay.Visible = false;
+                        btnReload.Visible = true;
+
+                        if (back.NumOfMatchesRemaining <= 0)
+                        {
+                            btnPlay.Visible = false;
+                            btnReload.Visible = false;
+                            lblState.Text = "Winner is: " + back.Winner;
+                        }
                     }
                     else
                     {
@@ -80,16 +99,37 @@ namespace Project_web_app2
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsStringAsync();
-                lblState.Text = result;
                 GameConst back = Newtonsoft.Json.JsonConvert.DeserializeObject<GameConst>(result);
                 lblMaxPerRound.Text = back.NumMatchesPerRound.ToString();
                 lblRemainingInfo.Text = back.TotalNumMatches.ToString();
-                //dopiš si co chceš
+                lblGameName.Text = back.GameName;
+
+                
             }
             else
             {
                 lblState.Text = "Error";
             }
+        }
+
+        protected void btnReload_Click(object sender, EventArgs e)
+        {
+            GetConst();
+            if (lblRemainingInfo.Text != lblLastCount.Text)
+            {
+                btnReload.Visible = false;
+                btnPlay.Visible = true;
+                tbMove.Text = "";
+                lblWhoTurn.Text = "You";
+
+                if ((int.Parse(lblRemainingInfo.Text) <= 0))
+                {
+                    btnPlay.Visible = false;
+                    btnReload.Visible = false;
+                    lblState.Text = "You lose";
+                }
+            }
+
         }
     }
 

@@ -28,19 +28,18 @@ namespace Project_web_app2
             {
                 if (isEmail(TextBox1.Text))
                 {
-                    Label2.Text = sessionId.ToString();
+                    lbl_errorMessage.Text = sessionId.ToString();
 
 
 
                     UserCreate user = new UserCreate
                     {
-
                         name = TextBox2.Text,
                         email = TextBox1.Text,
                     };
 
 
-                    Button2.Visible = false;
+                    btnLogin.Visible = false;
                     HttpClient client = new HttpClient();
                     client.BaseAddress = new Uri("https://localhost:44381/");
                     //client.BaseAddress = new Uri("https://oopzapalky.trialhosting.cz/matchapi/");
@@ -49,26 +48,23 @@ namespace Project_web_app2
                     {
                         var result = await response.Content.ReadAsStringAsync();
                         UserCreateReturn back = Newtonsoft.Json.JsonConvert.DeserializeObject<UserCreateReturn>(result);
-
-                        Label1.Text = back.playerId.ToString();
-
-
-                        Label2.Text = back.message;
-                        if (Label2.Text == "This email address is already being used")
+                        lbl_id.Text = back.playerId.ToString();
+                        lbl_errorMessage.Text = back.message;
+                        if (lbl_errorMessage.Text == "This email address is already being used")
                         {
-                            Label5.Text = "Do you want to sign in new player with new email?";
-                            Button3.Enabled = true;
-                            Button3.Visible = true;
-                            Label7.Text = "Nah just =>";
+                            lblSign.Text = "Do you want to sign in new player with new email?";
+                            btnSign.Enabled = true;
+                            btnSign.Visible = true;
+                            Label7.Text = "Continue nad login =>";
                         }
-                        Button2.Enabled = true;
-                        Button2.Visible = true;
-                        Button2.Text = "Continue";
+                        btnLogin.Enabled = true;
+                        btnLogin.Visible = true;
+                        btnLogin.Text = "Login";
 
                     }
                     else
                     {
-                        Label2.Text = "Error";
+                        lbl_errorMessage.Text = "Error";
                     }
                 }
                 else
@@ -85,13 +81,13 @@ namespace Project_web_app2
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Response.Redirect("GameCreate.aspx?id=" + Label1.Text);
+            Response.Redirect("GameCreate.aspx?id=" + lbl_id.Text);
         }
 
         protected void WrongInput()
         {
 
-            Label2.Text = "Wrong input \n" +
+            lbl_errorMessage.Text = "Wrong input \n" +
                     "try it again";
         }
 
@@ -110,11 +106,12 @@ namespace Project_web_app2
 
         protected void setnullall()
         {
-            Button2.Enabled = false;
-            Button2.Visible = false;
-            Button3.Enabled = false;
-            Button3.Visible = false;
-            Label5.Text = "";
+            btnLogin.Enabled = false;
+            btnLogin.Visible = false;
+            btnSign.Enabled = false;
+            btnSign.Visible = false;
+            lbl_errorMessage.Text = "";
+            lblSign.Text = "";
             Label7.Text = "";
 
         }

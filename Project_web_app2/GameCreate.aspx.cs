@@ -22,49 +22,18 @@ namespace Project_web_app2
                 return;
             else
             {
+                try
+                {
+                    Guid test = new Guid(Request["id"]);
+                }
+                catch (Exception)
+                {
+                    Response.Redirect("Default.aspx");
+                }
                 GetGames();
                 return;
             }
         }
-
-        //protected async void GetGames()
-        //{
-        //    IEnumerable<GameList> games = null;
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = new Uri("https://localhost:44381/");
-        //    HttpResponseMessage response = client.PostAsJsonAsync("api/gameCreate",1).Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var result = await response.Content.ReadAsStringAsync();
-        //        List<GameList> back = Newtonsoft.Json.JsonConvert.DeserializeObject<List<GameList>>(result);
-
-        //        lbGames.DataSource = back;
-        //    }
-        //    else
-        //    {
-        //        lblState.Text = "Error";
-        //    }
-        //}
-
-        //protected async void GetGames()
-        //{
-        //    IEnumerable<GameList> games = null;
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = new Uri("https://localhost:44381/");
-        //    HttpResponseMessage response = client.GetAsync("api/gameCreate").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var result = await response.Content.ReadAsStringAsync();
-        //        List<GameList> back = Newtonsoft.Json.JsonConvert.DeserializeObject<List<GameList>>(result);
-
-        //        lbGames.DataSource = back;
-        //    }
-        //    else
-        //    {
-        //        lblState.Text = "Error";
-        //    }
-        //}
-
         protected async void GetGames()
         {
             HttpClient client = new HttpClient();
@@ -109,11 +78,6 @@ namespace Project_web_app2
                 player2Id = playerid
             };
 
-
-            //HttpClient client = new HttpClient();
-            //client.BaseAddress = new Uri("https://localhost:44381/");
-            //await client.PutAsJsonAsync("api/gameCreate", join);
-
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("https://localhost:44381/");
             HttpResponseMessage response = client.PutAsJsonAsync("api/gameCreate/1", join).Result;
@@ -136,17 +100,16 @@ namespace Project_web_app2
                 int matches = int.Parse(DDNumMatches.Text);
                 int rounds = int.Parse(DDMatchRound.Text);
                 string name = tbGameName.Text;
-                if (/*new Guid(Request["id"]) == null*/ false)
+                if (new Guid(Request["id"]) == null)
                 {
-                    Response.Redirect("Defaul.aspx");
+                    Response.Redirect("Default.aspx");
                 }
                 else
                 {
                     GameCreated game = new GameCreated
                     {
                         gameName = name,
-                        //player1Id = new Guid(Request["id"]), //vypis ze spatne prihlasen, zpet na default
-                        player1Id = new Guid("af79b1d7-d847-4d1d-b72a-d02a90d11e14"),
+                        player1Id = new Guid(Request["id"]),
                         matchStartCount = matches,
                         matchRoundCount = rounds
 
@@ -212,7 +175,7 @@ namespace Project_web_app2
                 lblGameid.Text = result[lbGames.SelectedIndex].ToString();
                 lblState.Text = result[lbGames.SelectedIndex].ToString();
                 AddPlayer(new Guid(result[lbGames.SelectedIndex].ToString()), new Guid(Request["id"]));
-                //lbljoin.Text = "Successfull joined to game";
+                //lbljoin.Text = "Successfully joined to game";
 
                 lblInfoError.Visible = false;
                 Label1.Visible = false;

@@ -9,29 +9,36 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="Label4" runat="server" Text="Set the new game"></asp:Label>
-            &nbsp;or choose from prepared<br />
+            <asp:Label ID="Label4" runat="server" Text="Setup new game or choose from already created"></asp:Label>
+            <br />
             <br />
             <asp:Label ID="Label1" runat="server" Text="Name of the game:"></asp:Label>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<asp:TextBox ID="tbGameName" runat="server"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<asp:TextBox ID="tbGameName" runat="server" Height="20px" style="margin-left: 0px"></asp:TextBox>
         <asp:Label ID="lblNameOfGame" runat="server" Text="Label" Visible="False"></asp:Label>
             <br />
             <asp:Label ID="Label2" runat="server" Text="Number of matches:"></asp:Label>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DDNumMatches" runat="server" Height="16px" Width="45px">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DDNumMatches" runat="server" Height="30px" Width="45px" style="margin-left: 0px">
+                <asp:ListItem ></asp:ListItem>
                 <asp:ListItem Value="" Text =""></asp:ListItem>
-                <asp:ListItem Value="27" >27</asp:ListItem>
-                <asp:ListItem Value="20" >20</asp:ListItem>
-                <asp:ListItem Value="15" >15</asp:ListItem>
-                <asp:ListItem Value="12" >12</asp:ListItem>
+                <asp:ListItem>15</asp:ListItem>
+                <asp:ListItem>20</asp:ListItem>
+                <asp:ListItem>25</asp:ListItem>
+                <asp:ListItem>30</asp:ListItem>
+                <asp:ListItem>35</asp:ListItem>
+                <asp:ListItem>40</asp:ListItem>
+                <asp:ListItem>45</asp:ListItem>
+                <asp:ListItem>50</asp:ListItem>
             </asp:DropDownList>
         <asp:Label ID="lblNumOfMatches" runat="server" Text="Label" Visible="False"></asp:Label>
         </div>
         <asp:Label ID="Label3" runat="server" Text="Max. number of matches in one turn: "></asp:Label>
-&nbsp; <asp:DropDownList ID="DDMatchRound" runat="server" Height="30px" Width="46px">
+&nbsp; <asp:DropDownList ID="DDMatchRound" runat="server" Height="30px" Width="46px" style="margin-left: 0px">
                 <asp:ListItem Value="" ></asp:ListItem>
-                <asp:ListItem Value="4" >4</asp:ListItem>
-                <asp:ListItem Value="3" >3</asp:ListItem>
-                <asp:ListItem Value="2" >2</asp:ListItem>
+                <asp:ListItem>3</asp:ListItem>
+                <asp:ListItem>4</asp:ListItem>
+                <asp:ListItem>5</asp:ListItem>
+                <asp:ListItem>6</asp:ListItem>
+                <asp:ListItem>7</asp:ListItem>
             </asp:DropDownList>
         <asp:Label ID="lblNumOfTurns" runat="server" Text="Label" Visible="False"></asp:Label>
         <p>

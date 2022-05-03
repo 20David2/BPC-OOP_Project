@@ -25,12 +25,27 @@ namespace Project_api.Controllers
                         GameName = localgame.gameName,
                     };
 
-                    if (localgame.Player2Id == null)
-                    {
-                        gameConst.TotalNumMatches = (int)localgame.matchStartCount;
-                    }
-                    else
-                    {
+                    //if (localgame.Player2Id == null)
+                    //{
+                    //    gameConst.TotalNumMatches = (int)localgame.matchStartCount;
+                    //}
+                    //else
+                    //{
+                    //    var lastmove = (from m in db.Moves
+                    //                    where m.movesGameId == new Guid(gameid)
+                    //                    orderby m.moveNumber descending
+                    //                    select m).FirstOrDefault();
+                    //    if (lastmove != null)
+                    //    {
+                    //        gameConst.TotalNumMatches = lastmove.actualMatchCount;
+
+                    //    }
+                    //    else
+                    //    {
+                    //        gameConst.TotalNumMatches = (int)localgame.matchStartCount;
+                    //    }
+                    //}
+                    //return gameConst;
                         var lastmove = (from m in db.Moves
                                         where m.movesGameId == new Guid(gameid)
                                         orderby m.moveNumber descending
@@ -44,7 +59,7 @@ namespace Project_api.Controllers
                         {
                             gameConst.TotalNumMatches = (int)localgame.matchStartCount;
                         }
-                    }
+                    
                     return gameConst;
                 }
             }
@@ -78,6 +93,18 @@ namespace Project_api.Controllers
 
                             if (lastmove.movePlayer != move.playerId) //hrac je na tahu
                             {
+                                Move newMove = new Move
+                                {
+                                    movesGameId = game.gameId,
+                                    movePlayer = game.playerId,
+                                    moveNumber = lastmove.moveNumber + 1,
+                                    moveMatchCount = game.move,
+                                    actualMatchCount = lastmove.actualMatchCount - game.move
+                                };
+
+                                db.Moves.InsertOnSubmit(newMove);
+                                db.SubmitChanges();
+
                                 if (lastmove.actualMatchCount - game.move == 1)
                                 {
                                     if (localgame.player1Id == move.playerId) //player 2 is a winner
@@ -100,18 +127,6 @@ namespace Project_api.Controllers
                                     var winnerPlayer = db.Users.FirstOrDefault(p => p.userId == move.playerId);
                                     return new GameMoveReturn { state = true, NumOfMatchesRemaining = 0, NamePlayerTurn = winnerPlayer.userName, Winner = winnerPlayer.userName };
                                 }
-
-                                Move newMove = new Move
-                                {
-                                    movesGameId = game.gameId,
-                                    movePlayer = game.playerId,
-                                    moveNumber = lastmove.moveNumber + 1,
-                                    moveMatchCount = game.move,
-                                    actualMatchCount = lastmove.actualMatchCount - game.move
-                                };
-
-                                db.Moves.InsertOnSubmit(newMove);
-                                db.SubmitChanges();
 
                                 if (localgame.player1Id == move.playerId) //player 2 is on move
                                 {

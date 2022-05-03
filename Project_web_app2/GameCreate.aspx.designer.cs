@@ -51,6 +51,15 @@ namespace Project_web_app2
         protected global::System.Web.UI.WebControls.TextBox tbGameName;
 
         /// <summary>
+        /// lblNameOfGame control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNameOfGame;
+
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace Project_web_app2
         protected global::System.Web.UI.WebControls.DropDownList DDNumMatches;
 
         /// <summary>
+        /// lblNumOfMatches control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumOfMatches;
+
+        /// <summary>
         /// Label3 control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,15 @@ namespace Project_web_app2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DDMatchRound;
+
+        /// <summary>
+        /// lblNumOfTurns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumOfTurns;
 
         /// <summary>
         /// btSubmit control.
@@ -130,6 +157,15 @@ namespace Project_web_app2
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblInfoError;
+
+        /// <summary>
+        /// lblInfoSet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInfoSet;
 
         /// <summary>
         /// lbGames control.

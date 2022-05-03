@@ -15,6 +15,8 @@ namespace Project_web_app2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblState.Visible = false;
+            lblGameid.Visible = false;
             btContinue.Visible = false;
             if (IsPostBack)
                 return;
@@ -134,7 +136,7 @@ namespace Project_web_app2
                 int matches = int.Parse(DDNumMatches.Text);
                 int rounds = int.Parse(DDMatchRound.Text);
                 string name = tbGameName.Text;
-                if (new Guid(Request["id"]) == null)
+                if (/*new Guid(Request["id"]) == null*/ false)
                 {
                     Response.Redirect("Defaul.aspx");
                 }
@@ -143,7 +145,8 @@ namespace Project_web_app2
                     GameCreated game = new GameCreated
                     {
                         gameName = name,
-                        player1Id = new Guid(Request["id"]), //vypis ze spatne prihlasen, zpet na default
+                        //player1Id = new Guid(Request["id"]), //vypis ze spatne prihlasen, zpet na default
+                        player1Id = new Guid("af79b1d7-d847-4d1d-b72a-d02a90d11e14"),
                         matchStartCount = matches,
                         matchRoundCount = rounds
 
@@ -163,6 +166,20 @@ namespace Project_web_app2
                         lbGames.Visible = false;
                         btnredirect.Visible = false;
                         btContinue.Visible = true;
+                        btSubmit.Visible = false;
+                        lblInfoError.Visible = false;
+                        btnSet.Visible = false;
+
+                        lblNameOfGame.Text = name;
+                        lblNumOfMatches.Text = matches.ToString();
+                        lblNumOfTurns.Text = rounds.ToString();
+                        lblNameOfGame.Visible = true;
+                        lblNumOfMatches.Visible = true;
+                        lblNumOfTurns.Visible = true;
+                        tbGameName.Visible = false;
+                        DDNumMatches.Visible = false;
+                        DDMatchRound.Visible = false;
+
                     }
                     else
                     {
@@ -172,7 +189,9 @@ namespace Project_web_app2
             }
             else
             {
-                lblInfoError.Text = "You have to choose something";
+                
+                lblInfoError.Visible = true;
+                lblInfoError.Text = "You have to choose something !!!";
             }
 
             
@@ -187,11 +206,31 @@ namespace Project_web_app2
 
         protected void btnSet_Click(object sender, EventArgs e)
         {
-            var result = lbIds.Items.Cast<ListItem>().ToArray();
-            lblGameid.Text = result[lbGames.SelectedIndex].ToString();
-            lblState.Text = result[lbGames.SelectedIndex].ToString();
-            AddPlayer(new Guid(result[lbGames.SelectedIndex].ToString()), new Guid(Request["id"]));
-            //lbljoin.Text = "Successfull joined to game";
+            try
+            {
+                var result = lbIds.Items.Cast<ListItem>().ToArray();
+                lblGameid.Text = result[lbGames.SelectedIndex].ToString();
+                lblState.Text = result[lbGames.SelectedIndex].ToString();
+                AddPlayer(new Guid(result[lbGames.SelectedIndex].ToString()), new Guid(Request["id"]));
+                //lbljoin.Text = "Successfull joined to game";
+
+                lblInfoError.Visible = false;
+                Label1.Visible = false;
+                tbGameName.Visible = false;
+                Label2.Visible = false;
+                Label3.Visible = false;
+                DDNumMatches.Visible = false;
+                DDMatchRound.Visible = false;
+                btSubmit.Visible = false;
+                btContinue.Visible = false;
+            }
+            catch (Exception)
+            {
+                lblInfoError.Visible = true;
+                lblInfoError.Text = "You have to choose something!!!";
+                
+            }
+            
         }
 
         protected void lbGames_SelectedIndexChanged(object sender, EventArgs e)
@@ -203,8 +242,17 @@ namespace Project_web_app2
 
         protected void btnredirect_Click(object sender, EventArgs e)
         {
-            var result = lbIds.Items.Cast<ListItem>().ToArray();
-            Response.Redirect("Game.aspx?gameid=" + result[lbGames.SelectedIndex].ToString() + "&playerid=" + Request["id"]);
+            try
+            {
+                var result = lbIds.Items.Cast<ListItem>().ToArray();
+                Response.Redirect("Game.aspx?gameid=" + result[lbGames.SelectedIndex].ToString() + "&playerid=" + Request["id"]);
+            }
+            catch
+            {
+                lblInfoError.Text = "An error had occured. Try again";
+                lblInfoError.Visible = true;
+            }
+            
         }
     }
 }

@@ -35,7 +35,15 @@ namespace Project_api.Controllers
                                         where m.movesGameId == new Guid(gameid)
                                         orderby m.moveNumber descending
                                         select m).FirstOrDefault();
-                        gameConst.TotalNumMatches = lastmove.actualMatchCount;
+                        if (lastmove != null)
+                        {
+                            gameConst.TotalNumMatches = lastmove.actualMatchCount;
+
+                        }
+                        else
+                        {
+                            gameConst.TotalNumMatches = (int)localgame.matchStartCount;
+                        }
                     }
                     return gameConst;
                 }
@@ -84,7 +92,7 @@ namespace Project_api.Controllers
                                     }
                                     else //error, unknown player
                                     {
-                                        return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = null, Winner = null };
+                                        return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = "", Winner = "" };
                                     }
                                 }
                                 else if (lastmove.actualMatchCount - game.move <= 1) //player on move is a winner
@@ -108,16 +116,16 @@ namespace Project_api.Controllers
                                 if (localgame.player1Id == move.playerId) //player 2 is on move
                                 {
                                     var PlayerOnMove = db.Users.FirstOrDefault(p => p.userId == localgame.Player2Id);
-                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = newMove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = null };
+                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = newMove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = "" };
                                 }
                                 else if (localgame.Player2Id == move.playerId) //player 1 is on move
                                 {
                                     var PlayerOnMove = db.Users.FirstOrDefault(p => p.userId == localgame.player1Id);
-                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = newMove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = null };
+                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = newMove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = "" };
                                 }
                                 else //error, unknown player
                                 {
-                                    return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = null, Winner = null };
+                                    return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = "", Winner = "" };
                                 }
                             }
                             else //hrac neni na tahu
@@ -125,16 +133,24 @@ namespace Project_api.Controllers
                                 if (localgame.player1Id == move.playerId) //player 2 is on move
                                 {
                                     var PlayerOnMove = db.Users.FirstOrDefault(p => p.userId == localgame.Player2Id);
-                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = lastmove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = null };
+
+                                    if (PlayerOnMove == null)
+                                    {
+                                        return new GameMoveReturn { state = true, NumOfMatchesRemaining = lastmove.actualMatchCount, NamePlayerTurn = "Opponent", Winner = "" };
+                                    }
+                                    else
+                                    {
+                                        return new GameMoveReturn { state = true, NumOfMatchesRemaining = lastmove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = "" };
+                                    }
                                 }
                                 else if (localgame.Player2Id == move.playerId) //player 1 is on move
                                 {
                                     var PlayerOnMove = db.Users.FirstOrDefault(p => p.userId == localgame.player1Id);
-                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = lastmove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = null };
+                                    return new GameMoveReturn { state = true, NumOfMatchesRemaining = lastmove.actualMatchCount, NamePlayerTurn = PlayerOnMove.userName, Winner = "" };
                                 }
                                 else //error, unknown player
                                 {
-                                    return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = null, Winner = null };
+                                    return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = "", Winner = "" };
                                 }
                             }
 
@@ -153,21 +169,21 @@ namespace Project_api.Controllers
                             };
                             db.Moves.InsertOnSubmit(newMove);
                             db.SubmitChanges();
-                            return new GameMoveReturn { state = true, NumOfMatchesRemaining = newMove.actualMatchCount, NamePlayerTurn = null, Winner = null };
+                            return new GameMoveReturn { state = true, NumOfMatchesRemaining = newMove.actualMatchCount, NamePlayerTurn = "Opponent", Winner = "" };
                         }
                         else
                         {
-                            return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = null, Winner = null };
+                            return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = "", Winner = "" };
                         }
                     }
                     else //neplatný hráč
                     {
-                        return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = null, Winner = null };
+                        return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = "", Winner = "" };
                     }
                 }
                 else
                 {
-                    return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = null, Winner = null };
+                    return new GameMoveReturn { state = false, NumOfMatchesRemaining = 0, NamePlayerTurn = "", Winner = "" };
                 }
 
                 

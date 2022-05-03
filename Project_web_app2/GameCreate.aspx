@@ -88,7 +88,7 @@
 
     <div class="text-center p-6 fixed-bottom" style="background-color: gray">
         @2022 Copyright: Game of matches
-        <p>David Strouhal
+        <p>David Strouhal,
         Martin Zarecky</p>
         
                 </div>

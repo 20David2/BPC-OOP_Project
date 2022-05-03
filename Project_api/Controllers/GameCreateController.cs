@@ -16,7 +16,8 @@ namespace Project_api.Controllers
             List<GameList> list = new List<GameList>();
             using (var db = new DBLinqToSqlDataContext())
             {
-                var games = db.Games;
+                //var games = db.Games;
+                var games = db.Games.Where(p => p.Player2Id == null);
                 foreach (var game in games)
                 {
                     list.Add(new GameList { gameId = game.gameId, gameName = game.gameName, matchStartCount = (int)game.matchStartCount, matchRoundCount = (int)game.matchRoundCount });
@@ -30,15 +31,22 @@ namespace Project_api.Controllers
         // POST api/values
         public GameCreateReturn Post([FromBody] GameCreate newGame)
         {
-            Game game = new Game() { gameId = Guid.NewGuid(), gameName = newGame.gameName, player1Id = newGame.player1Id, matchStartCount = newGame.matchStartCount, matchRoundCount = newGame.matchRoundCount };
-
-            using (var db = new DBLinqToSqlDataContext())
+            try
             {
-                db.Games.InsertOnSubmit(game);
-                db.SubmitChanges();
-                return new GameCreateReturn { state = true, gameId = game.gameId, message = "Game successfully created" };
+                Game game = new Game() { gameId = Guid.NewGuid(), gameName = newGame.gameName, player1Id = newGame.player1Id, matchStartCount = newGame.matchStartCount, matchRoundCount = newGame.matchRoundCount };
+
+                using (var db = new DBLinqToSqlDataContext())
+                {
+                    db.Games.InsertOnSubmit(game);
+                    db.SubmitChanges();
+                    return new GameCreateReturn { state = true, gameId = game.gameId, message = "Game successfully created" };
+                }
             }
-        }
+            catch (Exception e )
+            {
+                return new GameCreateReturn { state = false, gameId = new Guid(), message = "Error" };
+            }
+        }   
 
 
         ////PUT api/values
@@ -48,10 +56,25 @@ namespace Project_api.Controllers
 
             using (var db = new DBLinqToSqlDataContext())
             {
-                Game game = db.Games.Single(x => x.gameId == join.gameId);
-                game.Player2Id = join.player2Id;
-                db.SubmitChanges();
-                return ("Submit succesfull");
+                if (db.Games.Any(x => x.gameId == join.gameId))
+                {
+                    Game game = db.Games.Single(x => x.gameId == join.gameId);
+                    if (game.Player2Id == null)
+                    {
+                        game.Player2Id = join.player2Id;
+                        db.SubmitChanges();
+                        return ("Submit succesfull");
+                    }
+                    else
+                    {
+                        return ("Error");
+                    }
+                }
+                else
+                {
+                    return ("Error");
+                }
+
             }
         }
 

@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace Project_web_app2
 {
-    
+
     public partial class Default : System.Web.UI.Page
     {
         public Guid sessionId = new Guid();
@@ -18,13 +18,13 @@ namespace Project_web_app2
         {
             setnullall();
             if (IsPostBack)
-            return;
+                return;
         }
 
         protected async void btn_Click(object sender, EventArgs e)
         {
-            
-            if (TextBox1.Text != "" && TextBox2.Text !="")
+
+            if (TextBox1.Text != "" && TextBox2.Text != "")
             {
                 if (isEmail(TextBox1.Text))
                 {
@@ -39,7 +39,7 @@ namespace Project_web_app2
                         email = TextBox1.Text,
                     };
 
-                    
+
                     Button2.Visible = false;
                     HttpClient client = new HttpClient();
                     client.BaseAddress = new Uri("https://localhost:44381/");
@@ -49,10 +49,10 @@ namespace Project_web_app2
                     {
                         var result = await response.Content.ReadAsStringAsync();
                         UserCreateReturn back = Newtonsoft.Json.JsonConvert.DeserializeObject<UserCreateReturn>(result);
-                        
-                        Label1.Text =back.playerId.ToString();
 
-                        
+                        Label1.Text = back.playerId.ToString();
+
+
                         Label2.Text = back.message;
                         if (Label2.Text == "This email address is already being used")
                         {
@@ -75,7 +75,7 @@ namespace Project_web_app2
                 {
                     WrongInput();
                 }
-                
+
             }
             else
             {
@@ -90,7 +90,7 @@ namespace Project_web_app2
 
         protected void WrongInput()
         {
-            
+
             Label2.Text = "Wrong input \n" +
                     "try it again";
         }

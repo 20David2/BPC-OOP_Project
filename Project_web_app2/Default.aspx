@@ -26,6 +26,7 @@
             <br />
             <asp:Label ID="lblText_PlayerEmail" runat="server" Text="Player email:"></asp:Label>
             <asp:TextBox ID="TextBox1" runat="server" Width="160px"></asp:TextBox>
+                        <br />
             <asp:Label ID="lblText_PlayerName" runat="server" Text="Player name:"></asp:Label>
             <asp:TextBox ID="TextBox2" runat="server" Width="160px" ></asp:TextBox>
         

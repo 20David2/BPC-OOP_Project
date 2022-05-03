@@ -1,13 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Project_api",
     "\\Project_api\\Models",
     "\\Project_api\\Properties",
     "\\Project_api\\Views",
     "\\Project_web_app2",
     "\\Project_web_app2\\App.Models"
   ],
-  "SelectedNode": "\\projectDB_log.ldf",
+  "SelectedNode": "\\Project_web_app2\\Default.aspx.cs",
   "PreviewInSolutionExplorer": false
 }

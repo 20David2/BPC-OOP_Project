@@ -3,20 +3,32 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
+<head runat="server">      
+    <title></title>      
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>  
+    <script src="js/bootstrap.min.js"></script>    
+    <link href="css/bootstrap.min.css" rel="stylesheet" />    
+</head> 
 <body>
-    <form id="form1" runat="server">
+    <div class="row">  
+    <div class="col-lg-12">  
+        <form id="form1" class="" runat="server">
         <div>
-            <asp:Label ID="Label4" runat="server" Text="Setup new game or choose from already created"></asp:Label>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-lg-3"></div>  
+                    <div class="col-lg-6">
+                        <h3>Setup new game or choose from already created</h3>
+                        <div>
+            
             <br />
             <br />
             <asp:Label ID="Label1" runat="server" Text="Name of the game:"></asp:Label>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<asp:TextBox ID="tbGameName" runat="server" Height="20px" style="margin-left: 0px"></asp:TextBox>
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<asp:TextBox ID="tbGameName" runat="server" Height="20px" style="margin-left: 0px"></asp:TextBox>
         <asp:Label ID="lblNameOfGame" runat="server" Text="Label" Visible="False"></asp:Label>
             <br />
             <asp:Label ID="Label2" runat="server" Text="Number of matches:"></asp:Label>
+            &nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:DropDownList ID="DDNumMatches" runat="server" Height="30px" Width="45px" style="margin-left: 0px">
                 <asp:ListItem ></asp:ListItem>
                 <asp:ListItem Value="" Text =""></asp:ListItem>
@@ -32,6 +44,7 @@
         <asp:Label ID="lblNumOfMatches" runat="server" Text="Label" Visible="False"></asp:Label>
         </div>
         <asp:Label ID="Label3" runat="server" Text="Max. number of matches in one turn: "></asp:Label>
+&nbsp;&nbsp;&nbsp;
 &nbsp; <asp:DropDownList ID="DDMatchRound" runat="server" Height="30px" Width="46px" style="margin-left: 0px">
                 <asp:ListItem Value="" ></asp:ListItem>
                 <asp:ListItem>3</asp:ListItem>
@@ -63,6 +76,22 @@
         <p>
             <asp:Button ID="btnredirect" runat="server" OnClick="btnredirect_Click" Text="Join" />
         </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        
     </form>
+        </div>
+        </div>
+
+    <div class="text-center p-6 fixed-bottom" style="background-color: gray">
+        @2022 Copyright: Game of matches
+        <p>David Strouhal,
+        Martin Zarecky</p>
+        
+                </div>
+
 </body>
 </html>

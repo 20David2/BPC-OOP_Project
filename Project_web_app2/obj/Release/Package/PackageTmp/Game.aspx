@@ -2,13 +2,25 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">      
+    <title></title>      
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>  
+    <script src="js/bootstrap.min.js"></script>    
+    <link href="css/bootstrap.min.css" rel="stylesheet" />    
+</head> 
 <body>
-    <form id="form1" runat="server">
+    <div class="row">  
+    <div class="col-lg-12">  
+        <form id="form1" class="" runat="server">
         <div>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-lg-3"></div>  
+                    <div class="col-lg-6">
+                        <h1>Lets play!</h1>
+                        <div>
             <asp:Label ID="lblGameNameText" runat="server" Text="Game name: "></asp:Label>
             <asp:Label ID="lblGameName" runat="server" Text="Label"></asp:Label>
             <br />
@@ -46,8 +58,25 @@
         <asp:Label ID="lblState" runat="server" Text=""></asp:Label>
         <br />
         <asp:Label ID="lblError" runat="server" Text="" Visible ="false"></asp:Label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        
 
 
     </form>
+        </div>
+        </div>
+
+    <div class="text-center p-6 fixed-bottom" style="background-color: gray">
+        @2022 Copyright: Game of matches
+        <p>David Strouhal,
+        Martin Zarecky</p>
+        
+                </div>
+
 </body>
 </html>
+

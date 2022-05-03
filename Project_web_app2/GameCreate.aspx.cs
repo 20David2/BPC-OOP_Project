@@ -37,7 +37,8 @@ namespace Project_web_app2
         protected async void GetGames()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44381/");
+            //client.BaseAddress = new Uri("https://localhost:44381/");
+            client.BaseAddress = new Uri("https://oopzapalkyapp.trialhosting.cz/matchapi/");
             HttpResponseMessage response = client.GetAsync("api/GameCreate?test=test").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -79,7 +80,8 @@ namespace Project_web_app2
             };
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44381/");
+            //client.BaseAddress = new Uri("https://localhost:44381/");
+            client.BaseAddress = new Uri("https://oopzapalkyapp.trialhosting.cz/matchapi/");
             HttpResponseMessage response = client.PutAsJsonAsync("api/gameCreate/1", join).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -118,7 +120,8 @@ namespace Project_web_app2
                     
 
                     HttpClient client = new HttpClient();
-                    client.BaseAddress = new Uri("https://localhost:44381/");
+                    //client.BaseAddress = new Uri("https://localhost:44381/");
+                    client.BaseAddress = new Uri("https://oopzapalkyapp.trialhosting.cz/matchapi/");
                     HttpResponseMessage response = client.PostAsJsonAsync("api/gameCreate", game).Result;
                     if (response.IsSuccessStatusCode)
                     {

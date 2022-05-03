@@ -4,7 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\david\OneDrive\Dokumenty\Publish_app</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\david\OneDrive\Dokumenty\OOP_project\Publish\Publish_app</_PublishTargetUrl>
+    <History>True|2022-05-03T02:54:53.2756065Z;True|2022-05-03T04:32:27.5763089+02:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Microsoft.AspNet.SessionState.SessionStateModule.dll">
@@ -17,10 +18,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/03/2014 22:33:56</publishTime>
     </File>
     <File Include="bin/Project_web_app2.dll">
-      <publishTime>05/02/2022 18:25:26</publishTime>
+      <publishTime>05/03/2022 04:54:52</publishTime>
     </File>
     <File Include="bin/Project_web_app2.pdb">
-      <publishTime>05/02/2022 18:25:26</publishTime>
+      <publishTime>05/03/2022 04:54:52</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>08/08/2018 05:38:48</publishTime>
@@ -179,16 +180,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/11/2022 21:12:28</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>05/02/2022 09:12:13</publishTime>
+      <publishTime>05/03/2022 02:57:36</publishTime>
     </File>
     <File Include="Game.aspx">
-      <publishTime>05/01/2022 14:20:18</publishTime>
+      <publishTime>05/03/2022 03:40:21</publishTime>
     </File>
     <File Include="GameCreate.aspx">
-      <publishTime>05/01/2022 20:42:08</publishTime>
+      <publishTime>05/03/2022 03:16:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/02/2022 18:02:37</publishTime>
+      <publishTime>05/03/2022 04:31:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -41,8 +41,8 @@ namespace Project_web_app2
 
                     btnLogin.Visible = false;
                     HttpClient client = new HttpClient();
-                    client.BaseAddress = new Uri("https://localhost:44381/");
-                    //client.BaseAddress = new Uri("https://oopzapalky.trialhosting.cz/matchapi/");
+                    //client.BaseAddress = new Uri("https://localhost:44381/");
+                    client.BaseAddress = new Uri("https://oopzapalkyapp.trialhosting.cz/matchapi/");
                     HttpResponseMessage response = client.PostAsJsonAsync("api/values", user).Result;
                     if (response.IsSuccessStatusCode)
                     {

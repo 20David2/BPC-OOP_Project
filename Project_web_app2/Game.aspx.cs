@@ -47,7 +47,8 @@ namespace Project_web_app2
                     move = int.Parse(tbMove.Text)
                 };
                 HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:44381/");
+                //client.BaseAddress = new Uri("https://localhost:44381/");
+                client.BaseAddress = new Uri("https://oopzapalkyapp.trialhosting.cz/matchapi/");
                 HttpResponseMessage response = client.PostAsJsonAsync("api/game", game).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -94,7 +95,8 @@ namespace Project_web_app2
         protected async void GetConst()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44381/");
+            //client.BaseAddress = new Uri("https://localhost:44381/");
+            client.BaseAddress = new Uri("https://oopzapalkyapp.trialhosting.cz/matchapi/");
             HttpResponseMessage response = client.GetAsync("api/Game?gameid=" + Request["gameid"]).Result;
             if (response.IsSuccessStatusCode)
             {

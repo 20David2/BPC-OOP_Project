@@ -25,27 +25,6 @@ namespace Project_api.Controllers
                         GameName = localgame.gameName,
                     };
 
-                    //if (localgame.Player2Id == null)
-                    //{
-                    //    gameConst.TotalNumMatches = (int)localgame.matchStartCount;
-                    //}
-                    //else
-                    //{
-                    //    var lastmove = (from m in db.Moves
-                    //                    where m.movesGameId == new Guid(gameid)
-                    //                    orderby m.moveNumber descending
-                    //                    select m).FirstOrDefault();
-                    //    if (lastmove != null)
-                    //    {
-                    //        gameConst.TotalNumMatches = lastmove.actualMatchCount;
-
-                    //    }
-                    //    else
-                    //    {
-                    //        gameConst.TotalNumMatches = (int)localgame.matchStartCount;
-                    //    }
-                    //}
-                    //return gameConst;
                         var lastmove = (from m in db.Moves
                                         where m.movesGameId == new Guid(gameid)
                                         orderby m.moveNumber descending
@@ -63,7 +42,7 @@ namespace Project_api.Controllers
                     return gameConst;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new GameConst() { GameName = null, NumMatchesPerRound = 0, TotalNumMatches = 0};
             }

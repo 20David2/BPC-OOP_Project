@@ -10,10 +10,10 @@ Games
 	player2id
 	matchStartCount
 	matchRoundCount
-	lastMoveNumber
 	
 Moves
 	gameid
 	moveNumber
 	movePlayer
 	moveMatchCount
+	actualMatchCount

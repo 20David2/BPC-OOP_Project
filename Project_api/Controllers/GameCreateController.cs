@@ -42,7 +42,7 @@ namespace Project_api.Controllers
                     return new GameCreateReturn { state = true, gameId = game.gameId, message = "Game successfully created" };
                 }
             }
-            catch (Exception e )
+            catch (Exception)
             {
                 return new GameCreateReturn { state = false, gameId = new Guid(), message = "Error" };
             }
@@ -78,9 +78,9 @@ namespace Project_api.Controllers
             }
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/values/5
+        //public void Delete(int id)
+        //{
+        //}
     }
 }
